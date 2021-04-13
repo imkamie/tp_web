@@ -1,0 +1,33 @@
+{% load static %}
+
+<header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="#">AskMe</a>
+          <form class="d-flex search">
+            <input
+              class="form-control me-4 input-search"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-success button-ask" type="submit">
+              Ask!
+            </button>
+          </form>
+
+
+          <img class="user-avatar" src="{% static "img/img.png" %}" alt="avatar">
+
+          <div class="user-data">
+            <span class="user-name text-light">UserName</span>
+            <div class="user-settings">
+              <a href="#">Settings</a>
+              <a href="#">Log out</a>
+            </div>
+          </div>
+
+        </div>
+      </nav>
+    </header>
