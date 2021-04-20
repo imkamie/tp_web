@@ -1,33 +1,49 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
+from app.models import Question
+from app.models import Answer
 
-from django.shortcuts import render
-
-questions = [
-    {
-        'id': idx,
-        'title': f'Title number {idx}',
-        'text': f'Some text for question #{idx}'
-    } for idx in range(10)
-]
 
 def index(request):
-    return render(request, 'index.html', {'questions': questions})
+  questions = Question.objects.new_questions()
+  questions = paginate(request, questions)
+  return render(request, 'index.html', {
+    'questions': questions,
+    'page_obj': questions
+  })
+
 
 def hot_questions(request):
-  return render(request, 'hot_questions.html', {'questions': questions})
+  questions = Question.objects.hot_questions()
+  questions = paginate(request, questions)
+  return render(request, 'hot_questions.html', {
+    'questions': questions,
+    'page_obj': questions
+  })
 
 def question(request, pk):
-  question = questions[pk]
-  return render(request, 'question.html', {"question": question})
+  question = Question.objects.filter(identificator=pk).first()
+  answers = Answer.objects.filter(question=question)
+  answers = paginate(request, answers)
+  return render(request, 'question.html', {
+    'question': question,
+    'answers': answers,
+    'page_obj': answers
+  })
+
 
 def ask(request):
   return render(request, 'ask.html', {})
 
-# def question(request):
-#   return render(request, 'question.html', {})
 
-def tag(request):
-  return render(request, 'tag.html', {})
+def tag(request, tag):
+  questions_ = Question.objects.questions_by_tag(tag)
+  questions = paginate(request, questions_)
+  return render(request, 'tag.html', {
+    'questions': questions_,
+    'page_obj': questions
+  })
+
 
 def settings(request):
   return render(request, 'settings.html', {})
@@ -37,3 +53,9 @@ def login(request):
 
 def signup(request):
   return render(request, 'signup.html', {})
+
+def paginate(request, objects_list, per_page=5):
+  paginator = Paginator(objects_list, per_page)
+  page_number = request.GET.get('page')
+  page_obj = paginator.get_page(page_number)
+  return page_obj

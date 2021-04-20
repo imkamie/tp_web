@@ -1,33 +1,49 @@
 {% load static %}
 
 <header>
-      <!-- Fixed navbar -->
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container">
-          <a class="navbar-brand" href="#">AskMe</a>
-          <form class="d-flex search">
-            <input
-              class="form-control me-4 input-search"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-success button-ask" type="submit">
-              Ask!
-            </button>
-          </form>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'new' %}">AskMe</a>
+      <form action="{% url 'ask' %}" class="d-flex search">
+        <input
+          class="form-control me-4 input-search"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-success button-ask" type="submit">
+          Ask!
+        </button>
+      </form>
 
-
-          <img class="user-avatar" src="{% static "img/img.png" %}" alt="avatar">
-
-          <div class="user-data">
-            <span class="user-name text-light">UserName</span>
-            <div class="user-settings">
-              <a href="#">Settings</a>
-              <a href="#">Log out</a>
-            </div>
+      <img class="user-avatar" src="{% static "img/img.png" %}" alt="avatar">
+        <div class="user-data">
+          <span class="user-name text-light">{{ user.username }}</span>
+          <div class="user-settings">
+            <a href="{% url "settings" %}">Settings</a>
+            <a href="{% url "login" %}">Log out</a>
           </div>
-
         </div>
-      </nav>
-    </header>
+
+{#      {% if user.is_authenticated %}#}
+{#        <img class="user-avatar" src="{{ user.profile.avatar.url }}" alt="avatar">#}
+{#        <div class="user-data">#}
+{#          <span class="user-name text-light">UserName</span>#}
+{#          <div class="user-settings">#}
+{#            <a href="{% url "settings" %}">Settings</a>#}
+{#            <a href="{% url "login" %}" onclick="logout()">Log out</a>#}
+{#          </div>#}
+{#        </div>#}
+{#      {% else %}#}
+{#        <div class="user-data">#}
+{#          <div class="user-settings">#}
+{#            <a href="{% url "login" %}">Log In</a>#}
+{#            <a href="{% url "register" %}">Register</a>#}
+{#          </div>#}
+{#        </div>#}
+{#      {% endif %}#}
+
+    </div>
+  </nav>
+</header>

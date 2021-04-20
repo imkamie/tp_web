@@ -1,8 +1,19 @@
 {% extends "include/base.html" %}
 {% load static %}
 
+{% block topic %}
+  <h2>Hot Questions</h2>
+  <a href="{% url "new" %}">New questions</a>
+{% endblock topic %}
+
 {% block content %}
+{#  {% for post in page_obj.object_list %}#}
+{#   {% include 'include/question.html' %}#}
+{#  {% endfor %}#}
+
   {% for question in questions %}
     {% include "include/question.html" %}
   {% endfor %}
+
+  {% include 'include/paginator.html' %}
 {% endblock content %}

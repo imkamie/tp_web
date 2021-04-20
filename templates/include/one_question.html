@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="row question-block">
+<div class="row question">
   <div class="row">
     <div class="col-3">
       <img class="question-avatar" src="{% static "img/img.png" %}" />
@@ -8,9 +8,9 @@
 
     <div class="col-9">
       <div class="asking">
-        <a href="{% url "question" pk=1 %}"><h4>{{ question.title }}</h4></a>
+        <a href="#"><h4>Lorem ipsum dolor sit amet</h4></a>
         <div>
-          {{ question.text }}
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, provident earum, ab, quos eius illum incidunt officia iusto quae natus dignissimos explicabo! Pariatur dolores molestiae veniam beatae quia accusantium id.
         </div>
       </div>
     </div>
@@ -36,14 +36,9 @@
     </div>
 
     <div class="col-9">
-      <a class="answer-num" href="{% url "question" question.identificator %}">answer ({{ question.answrs_count }})</a>
-
       <span class="tags">Tags:
-         {% for tag in question.tags.all %}
-                 <a href="{% url 'tag' tag.title %}">{{ tag.title }}</a>
-         {% endfor %}
-{#        <a href="#">{{ tag.text }}</a>#}
-{#        <a href="#">{{ tag.text }}</a>#}
+        <a href="#">black-jack</a>
+        <a href="#">bender</a>
       </span>
     </div>
   </div>
